@@ -1,0 +1,61 @@
+.info-tb{
+    width: 100%;
+    font-size: 12px;
+}
+
+.info-tb td{
+    padding-bottom: 8px;
+}
+
+.info-tb .lt{
+    width: 75px;
+}
+
+.info-tb .lt div{
+    width: 100%;
+    text-align: left;
+}
+
+.info-tb .rt{
+    width: calc(100% - 75px);
+    text-align: left;
+}
+
+.info-tb .rt input{
+    width: 90px;
+    vertical-align: middle;
+    border-radius: 4px;
+    padding: 2px 8px 2px 8px;
+    box-shadow: 0 1px 1px 0 #f6f6f6 inset;
+    border: 1px solid #c3c3c3;
+    height: 26px;
+    color: #666;
+    background-color: #fff;
+    box-sizing: border-box;
+    outline: 0;
+}
+
+.info-unit{
+    margin-left: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.custom-btn{
+    width: 90px;
+    height: 26px;
+    line-height: 26px;
+    cursor: pointer;
+    color: #FFFFFF;
+    box-sizing: border-box;
+    background: rgb(70, 169, 254);
+    border-color: rgb(46, 132, 206);
+    box-shadow: 0 0 3px rgb(64, 134, 193);
+    text-align: center;
+    border-radius: 4px;
+    user-select: none;
+    -khtml-user-select : none;
+    -moz-user-select : none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}

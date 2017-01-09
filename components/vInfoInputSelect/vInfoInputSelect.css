@@ -1,0 +1,22 @@
+.v-info-input-select{
+    position: relative;
+    display: inline-block;
+    width: 90px;
+    height: 26px;
+}
+
+.v-info-input-select input.select-input{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    width: 70px;
+    border-right: none;
+}
+
+.v-info-input-select select{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}

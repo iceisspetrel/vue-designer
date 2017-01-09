@@ -1,0 +1,309 @@
+<!--
+    checkbox、radio
+-->
+<style>
+    #crs_custom{
+        font-size: 12px;
+        margin: 20px;
+    }
+
+    #crs_custom .cus-tb{
+
+    }
+
+    #crs_custom .cus-tb td,#crs_custom .cus-tb-multi td{
+        text-align: center;
+    }
+
+    #crs_custom .cus-tb td:nth-child(1){
+        width: 100px;
+    }
+
+    #crs_custom .cus-tb td:nth-child(2){
+        width: 200px;
+    }
+
+    #crs_custom .cus-tb td:nth-child(3){
+        width: 200px;
+    }
+
+    #crs_custom .cus-tb td:nth-child(4){
+        width: 100px;
+        text-align: center;
+    }
+
+    #crs_custom .cus-tb-multi td:nth-child(1){
+        width: 75px;
+    }
+
+    #crs_custom .cus-tb-multi td:nth-child(2),#crs_custom .cus-tb-multi td:nth-child(3),#crs_custom .cus-tb-multi td:nth-child(4){
+        width: 125px;
+    }
+
+    #crs_custom .cus-tb-multi td:nth-child(5){
+        width: 50px;
+    }
+
+    #crs_custom .cus-tb-multi td:nth-child(6){
+        width: 100px;
+        text-align: center;
+    }
+
+    #crs_custom .c-head td{
+        background-color: rgb(242, 242, 242);
+        height: 30px;
+        border: 1px solid #ccc;
+    }
+
+    #crs_custom .c-head td:hover{
+        background-color: rgb(234, 242, 255);
+    }
+
+    #crs_custom .c-head{
+        margin-top: 10px;
+    }
+
+    #crs_custom .c-main , #crs_custom .c-main-multi{
+        height: 303px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 612px;
+    }
+
+    #crs_custom .c-main td, #crs_custom .c-main-multi td{
+        border: 1px solid #ccc;
+        height: 30px;
+    }
+
+    #crs_custom .c-main td .input{
+        width: 190px;
+        border: 1px solid transparent;
+        background-color: transparent;
+    }
+
+    #crs_custom .c-main-multi td .input{
+        width: 115px;
+        border: 1px solid transparent;
+        background-color: transparent;
+    }
+
+     #crs_custom .c-main-multi td .multi-input{
+        width: 40px;
+        border: 1px solid transparent;
+        background-color: transparent;
+    }
+
+    #crs_custom .c-btn{
+        width: 80px;
+        height: 23px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        line-height: 23px;
+        cursor: pointer;
+        background-color: rgb(255, 255, 255);
+        text-align: center;
+        display: inline-block;
+    }
+
+    #crs_custom .c-btn:active{
+        background-color: rgb(230, 230, 230);
+    }
+
+    #crs_custom .c-main tr.odd td , #crs_custom .c-main-multi tr.odd td{
+        background-color: rgb(250, 250, 250);
+    }
+
+    #crs_custom .c-main tr:hover td, #crs_custom .c-main-multi tr:hover td{
+        background-color: rgb(234, 242, 255);
+    }
+
+    #crs_custom .c-head td{
+        font-weight: bold;
+        cursor: default;
+    }
+</style>
+<div id="crs_custom" class="widget">
+    <div class="c-btn" @click="addItem">添加选项</div>
+    <div class="c-head">
+        <table v-if="select== 'single'" class="cus-tb">
+            <tr>
+                <td>默认选中</td>
+                <td>选项文本</td>
+                <td>选项值</td>
+                <td>操作</td>
+            </tr>
+        </table>
+        <table v-else class="cus-tb-multi">
+            <tr>
+                <td>默认选中</td>
+                <td>选项文本一</td>
+                <td>选项文本二</td>
+                <td>选项文本三</td>
+                <td>选项值</td>
+                <td>操作</td>
+            </tr>
+        </table>
+    </div>
+    <div v-if="select== 'single'" class="c-main">
+        <table class="cus-tb">
+            <tr v-for="item in list" :class="{'odd' : $index % 2 == 1}">
+                <td>
+                    <input @click="changeDefaultChecked($index)" type="radio" :checked="item.defaultChecked === true"/>
+                </td>
+                <td>
+                    <input :title="item.label_1" class="input" type="text" v-model="item.label_1"/>
+                </td>
+                <td>
+                    <input class="input" :title="item.value" type="text" v-model="item.value"/>
+                </td>
+                <td>
+                    <div class="c-btn" @click="removeItem($index)">删除</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div v-else class="c-main-multi">
+        <table class="cus-tb-multi">
+            <tr v-for="item in list" :class="{'odd' : $index % 2 == 1}">
+                <td>
+                    <input type="checkbox" @click="changeDefaultChecked($index)" :checked="item.defaultChecked"/>
+                </td>
+                <td>
+                    <input :title="item.label_1" class="input" type="text" v-model="item.label_1"/>
+                </td>
+                <td>
+                    <input :title="item.label_2" class="input" type="text" v-model="item.label_2"/>
+                </td>
+                <td>
+                    <input :title="item.label_3" class="input" type="text" v-model="item.label_3"/>
+                </td>
+                <td>
+                    <input class="multi-input" :title="item.value" type="text" v-model="item.value"/>
+                </td>
+                <td>
+                    <div class="c-btn" @click="removeItem($index)">删除</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+
+    var timer;
+    zDialog.pageCallBack = function(target){
+        var map = target.data('map');
+        var vm = new Vue({
+            el : '#crs_custom',
+            data : function(){
+                var list = {};
+                if (map.data.model.config.SelectModel == "single") {
+                    //如果是单选模式，list就赋值为对应第一列即可
+                    list = map.data.model.config[map.key].map(function(item){
+                        return {
+                            label_1 : item.label_1,
+                            value : item.value,
+                            defaultChecked : item.defaultChecked ? true : false
+                        }
+                    });
+                }else{
+                    //如果是多选模式，为了达到最多可以配置三个的效果，取数据先来判断，如果是不满3个的，也要自动补齐三个 label为空来绘制
+                    list = map.data.model.config[map.key].map(function(item){
+                        return {
+                            label_1 : item.label_1,
+                            label_2 : item.label_2,
+                            label_3 : item.label_3,
+                            value : item.value,
+                            defaultChecked : item.defaultChecked ? true : false
+                        }
+                    });
+                }
+                return {
+                    list : list,
+                    type : map.data.model.name,
+                    select :　map.data.model.config.SelectModel
+                };
+            },
+
+            methods : {
+                addItem : function(){
+                    // if(timer){
+                    //     clearTimeout(timer);
+                    //     timer = null;
+                    // }
+                    var index = this.getName();
+                    if (this.select == "single") {
+                        this.list.push({
+                            label_1 : 'content-' + index,
+                            value : index,
+                            defaultChecked : false
+                        });
+                    }else{
+                        this.list.push({
+                            label_1 : 'content-' + index,
+                            label_2 : 'content-' + index,
+                            label_3 : 'content-' + index,
+                            value : index,
+                            defaultChecked : false
+                        });
+                    }
+                    
+
+                    // timer = setTimeout(function(){
+                    //     timer = null;
+                    //     if (this.select == "single") {
+                    //         var $scroller = $('#crs_custom .c-main');
+                    //     }else{
+                    //         var $scroller = $('#crs_custom .c-main-multi');
+                    //     }
+                    //     // debugger;
+                    //     //$scroller.scrollTop($scroller[0].scrollHeight);
+                    //     $scroller.mCustomScrollbar('scrollTo', 'bottom');
+                    // }, 100);
+                },
+
+                removeItem : function(index){
+                    this.list.splice(index, 1);
+                },
+
+                getName : function(i){
+                    if(!i){
+                        i = 1;
+                    }
+                    var name = 'content-' + i;
+                    var result = _.find(this.list, function(item){
+                        return item.label_1 == name;
+                    });
+                    if(result){
+                        return this.getName(i + 1);
+                    }
+                    return i;
+                },
+
+                changeDefaultChecked : function(index){
+
+                    if(this.select === 'multi'){
+                        this.list[index].defaultChecked = !this.list[index].defaultChecked;
+                    } else {
+                        if(this.list[index].defaultChecked){
+                            this.list[index].defaultChecked = false;
+                            return;
+                        }
+                        for(var i=0; i<this.list.length; i++){
+                            if(i === index){
+                                this.list[i].defaultChecked = true;
+                            } else {
+                                this.list[i].defaultChecked = false;
+                            }
+                        }
+                    }
+                },
+
+                getResult : function(){
+                    return this.list;
+                }
+            }
+        });
+
+        $(target).find('.widget').data('widget', vm);
+    }
+</script>

@@ -1,0 +1,66 @@
+.v-checkbox{
+	position: relative;
+}
+
+.v-checkbox .edit-mask{
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+}
+
+.v-checkbox .check-item{
+
+}
+
+.v-checkbox .check-item.vertical{
+	display: block;
+}
+
+.v-checkbox .check-item.vertical{
+	display: block;
+}
+
+.v-checkbox .check-item.horizontal{
+	display: inline-block;
+}
+
+.v-checkbox .check-item input{
+	margin: 0 5px 0 0;
+	vertical-align: middle;
+}
+
+.v-checkbox .check-item label{
+	vertical-align: middle;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+	margin: 0 15px 0 7px;
+}
+
+.v-checkbox .check-item:last-child label{
+	margin-right: 0;
+}
+
+.v-checkbox .main-wrap{
+	display: inline-block;
+	width: 100%;
+	position: relative;
+}
+
+.v-checkbox .error-msg{
+	position: absolute;
+	border: 1px solid rgb(204, 204, 204);
+	border-radius: 4px;
+	padding: 5px;
+	color: rgb(236, 0, 0);
+	left : 0;
+	top : calc(100% + 5px);
+	font-size: 12px;
+	max-width: 100%;
+	word-break: break-all;
+	min-width: 150px;
+	display: none;
+}

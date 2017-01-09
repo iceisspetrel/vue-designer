@@ -1,0 +1,103 @@
+.select_btn_arrow{
+	border:7px solid transparent;
+	width:0;
+	height:0;
+	border-top-color: #646464;
+	margin: 11px auto;
+}
+
+.select_btn_arrow_up{
+	border:7px solid transparent;
+	width:0;
+	height:0;
+	border-bottom-color: #646464;
+	margin: 11px auto;
+	padding-top: -7px;
+}
+
+.select_Container{
+	border-style:solid;
+	min-width:100px;
+	min-height:26px;
+	box-sizing: border-box;
+	border-width: 1.5px;
+}
+
+.select_Container_Error {
+	border: 1px solid red;
+    box-shadow: 0 0 1px red;
+}
+
+.select_Content{
+	float: left;
+	min-width: 60px;
+	min-height:24px;
+	padding-left:3px;
+}
+
+.select_Input{
+	min-width: 60px;
+	min-height:24px;
+	padding-left: 5px;
+	overflow: hidden;
+	white-space: nowrap;
+	font-family: 微软雅黑;
+}
+
+.select_btn{
+	width: 26px;					
+	min-height:24px;
+	float: right;
+	border-left-style:solid;
+	box-sizing: border-box;
+	border-width: 1.5px;
+	text-align: center;
+}
+
+.select_itemBox{
+	position: absolute;
+	background-color: white;
+	opacity: 0.8;
+	top: 2px;
+	height: auto;
+	border: 1px solid #D4D4D4;
+	border-radius: 6px;
+	display: none;
+	max-height: 140px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.select_itemBox ul{
+	list-style: none;
+	margin: 5px 0;
+	padding: 0;
+	font-size:12px;
+}
+
+.select_itemBox li{
+	position: relative;
+	height: 22px;
+	line-height: 22px;
+}
+
+.select_itemBox [class ^="select_item_"]{
+	margin-left: 5px;
+	height: 100%;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	padding-left: 5px;
+	cursor: pointer;
+	width:95%;
+}
+
+.select_itemBox [class ^="select_item_"]:hover{
+	border-color: #F29312;
+}
+
+.select_ErrorMsg{
+	color: red;
+    word-wrap: break-word;
+    padding: 10px;
+    display: none;
+}

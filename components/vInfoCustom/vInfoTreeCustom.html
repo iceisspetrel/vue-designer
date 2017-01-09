@@ -1,0 +1,66 @@
+<style type="text/css">
+.tree-custom-page{
+	width: 400px;
+	height: 260px;
+	padding-top: 12px;
+	padding-left: 18px; 
+}
+.tree-custom-page .c-btn{
+        width: 80px;
+        height: 23px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        line-height: 23px;
+        cursor: pointer;
+        background-color: rgb(255, 255, 255);
+        text-align: center;
+        display: inline-block;
+
+    }
+.tree-custom-page .c-tcontainer{
+	width: 363px;
+	height: 162px;
+	border: 1px solid #d6d6d6;
+	margin-top: 10px;
+	overflow: auto;
+
+ }
+</style>
+<div class="tree-custom-page widget">
+	<div class="c-btn" @click="addRoot">添加根目录</div>
+	<div class="c-tcontainer">
+		<v-tree :config="data"></v-tree>
+	</div>
+</div>
+<script type="text/javascript">
+    var timer;
+    zDialog.pageCallBack = function(target){
+    	
+    	 var map = target.data('map');
+    	 map.data.model.config.modeType= 'normal'
+    	 var vm = new Vue({
+            el : target.find('div.tree-custom-page')[0],
+            data : function(){
+                return {
+                	data : map.data.model.config
+                    ,value :'请输入请求地址'
+                }
+            },
+            methods : {
+            	addRoot : function(){
+            		var _tree = this.$children[0];
+            		if(_tree){
+            			_tree.addNodes(null,-1,{
+            				name : '节点' + ( _tree.getNodes().length + 1 )
+            			});
+            		}
+            	}
+            	,getResult : function(){
+            		var _tree = this.$children[0];
+            		return _tree.method('getNodes');
+            	}
+            }
+        });
+    	 $(target).find('.widget').data('widget', vm);
+    }
+</script>

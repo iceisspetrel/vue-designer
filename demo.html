@@ -1,0 +1,76 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="style/style.css">
+		<link rel="stylesheet" type="text/css" href="lib/jquery-ui.min.css">
+		<script type="text/javascript" src="lib/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="lib/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="lib/sea-debug.js"></script>
+	</head>
+	<body>
+		<div id="div_tree" style="width:200px;position:absolute; top:20px; left:20px;"></div>
+		<!-- <div id="div_tab" ></div>
+		<div id="div_tab1">fdsjialfjidsalfjfs</div>
+		<div id="div_tab2">12222222222</div>
+		<div id="div_tab3">33333333333</div>
+		<div id="div_tab4">444444444444</div>
+		<div id="div_tab5">5555555555</div> -->
+	</body>
+	<script type="text/javascript">
+	window.onload = function(){
+		seajs.config({
+			'base': '/src',
+			'alias': { //简化模块名称
+			},
+			'paths': { //映射模块路径
+				'components' :'designer/components'
+				,'helper' : 'designer/helper'
+				,'lib' : 'designer/lib'
+				,'style' : 'designer/style'
+			},
+			'charset': 'utf-8',
+			'preload': [ // 在普通模块加载前加块此模块
+				'designer/lib/vue.js',
+				'designer/lib/jquery.ui.ruler.css',
+				'designer/lib/jquery.ui.ruler.js',
+				'designer/lib/underscore-min.js',
+				'designer/lib/bootstrap.css',
+				'designer/lib/bootstrap'
+			]
+		});
+		seajs.use('components/ComponentFactory',function(factory){
+			window._tree = factory.createComponent('#div_tree','v-input',{
+				config : {
+					isrequired : true // 是否非空
+					,valid : 'number' // 正则
+					,minlength : 5 // 最小长度
+					,maxlength : 10 // 最大长度
+					,onValid : function(input,value){ // 自定义验证回调
+						if(value.indexOf('456') < 0){
+							this.errormsg = '必须包含456' // 设置提示语
+							return false;
+						}
+						return true;
+					}
+				}
+			});
+		// 	window._tree = factory.createComponent('#div_tab','v-tab',{
+		// 		config : {
+		// 			data : [
+		// 				{
+		// 					name : 'test1'
+		// 					,ele : document.getElementById('div_tab1')
+		// 				}
+		// 				,{name : 'test1',ele : document.getElementById('div_tab2')}
+		// 				,{name : 'test1',ele : document.getElementById('div_tab3')}
+		// 				,{name : 'test1',ele : document.getElementById('div_tab4')}
+		// 				,{name : 'test1',ele : document.getElementById('div_tab5')}
+		// 			]	
+		// 		}
+		// 	})
+		// });
+	})
+	}
+	</script>
+</html>

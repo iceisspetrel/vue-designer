@@ -1,0 +1,11 @@
+.v-info-select{
+    width: 90px;
+    height: 26px;
+    color: #666;
+    border-radius: 4px;
+    border: 1px solid #c3c3c3;
+    box-shadow: 0 1px 1px 0 #f6f6f6 inset;
+    box-sizing: border-box;
+    padding-left: 3px;
+    outline: none;
+}

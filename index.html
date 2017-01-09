@@ -1,0 +1,148 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="style/style.css">
+		<link rel="stylesheet" type="text/css" href="lib/jquery-ui.min.css">
+		<!--避免require的方式覆盖业c03业务模块的zDialog， 暂时在index中引入-->
+		<link rel="stylesheet" type="text/css" href="lib/zDialog/zDialog.css">
+		<title></title>
+		<script type="text/javascript" src="lib/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="lib/jquery-ui.min.js"></script>
+		<!--避免require的方式覆盖业c03业务模块的zDialog， 暂时在index中引入-->
+		<script type="text/javascript" src="lib/zDialog/zDialog.js"></script>
+		<script type="text/javascript" src="lib/sea-debug.js"></script>
+	</head>
+	<body>
+		<div style="position:absolute;top:0px; bottom:0px; left : 0px; right:0px;overflow:hidden;">
+			<div class="form-container" style="height:48px;">
+				<div class="designer-topic">
+					<span>表单编辑器配置</span>
+				</div>
+				<div class="designer-menu" id="designerMenu">
+					<ul class="menu-list lt-menu">
+						<li class="menu" @click="newPage">新建</li>
+						<li class="menu" @click="open">打开</li>
+						<li class="menu" @click="preview">预览</li>
+						<li class="menu" @click="save">保存</li>
+						<li class="menu" @click="saveAs">另存为</li>
+					</ul>
+
+					<ul class="menu-list rt-menu">
+						<li class="menu" @click="help">帮助</li>
+						<li class="line">|</li>
+						<li class="menu" @click="close">关闭</li>
+					</ul>
+				</div>
+			</div>
+			<div class="form-container" style="top:48px; bottom:0px;">
+				<div style="width:220px;z-index: 15">
+					<ul class="lt-menu" id="componentList">
+						<li class="menu-item">
+							<div class="title">
+								<span class="arr"></span>
+								<span>组件</span>
+							</div>
+							<div class="main" v-mcscroll style="display:none;">
+								<div class="form-item-list">
+									<div v-for="item in components" v-lt-drag component="{{item.name}}">
+										<div>
+											<span class="glyphicon" :class="item.icon"></span>
+											<span v-text="item.title"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div style="left:220px; right:220px;z-index: 10">
+					<div style="background-color:#E5E5E5; height:30px;display:none;" id="tabPanel">
+						<ul class="page-list">
+							<li v-for="item in pageList" @click="changePage($index)" class="page" :class="{open : item.open}">
+								<span v-text="item.config.name"></span>
+								<span class="close-btn" @click.stop="closePage($index)"></span>
+							</li>
+						</ul>
+					</div>
+					<div id="mainPanel" style="width: 100%;height: calc(100% - 30px); position:relative;overflow:hidden;">
+						<v-main-panel :components="components" :config="config"><v-main-panel>
+						<!-- <div id="mainPanel" v-md-drag v-md-drop @click="panelClick" class="vm-panel-object" style="position:absolute; top : 0px ; left : 0px;  width:100%; height:100%;">
+							<v-drag  v-for="item in components"  index={{$index}} v-on:mousedown="setCurrentComponent" v-on:click.stop="setCurrentComponent" :id="item.id" :config="item.config" :component="item">
+							</v-drag>
+						</div> -->
+					</div>
+				</div>
+				<div style="right:0px;width:220px;height:100%;">
+					<div style="height:30px;background-color:#d8d8d8;line-height:30px;text-align:center;font-size:14px;color:rgb(70,70,70);">基础属性及数据配置</div>
+					<div id="settingPanel">
+						<ul class="info-list" style="display:none;">
+							<li class="item" id="page_info">
+								<div class="title" @click="infoItemClick">
+									<span>页面设置</span>
+								</div>
+								<div class="main" v-mcscroll :options="">
+									<div class="detail">
+										<table class="info-tb" v-if="!config.nopage">
+											<tr>
+												<td class="lt">
+													<div>页面宽度</div>
+												</td>
+												<td class="rt">
+													<input type="text" placeholder="auto" :title="config.width" v-model="config.width">
+													<span class="info-unit">px</span>
+												</td>
+											</tr>
+											<tr>
+												<td class="lt">
+													<div>页面高度</div>
+												</td>
+												<td class="rt">
+													<input type="text" placeholder="auto" :title="config.height" v-model="config.height">
+													<span class="info-unit">px</span>
+												</td>
+											</tr>
+											<tr>
+												<td class="lt">
+													<div>页面名称</div>
+												</td>
+												<td class="rt">
+													<input type="text" :title="config.name" v-model="config.name">
+												</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</li>
+							<li class="item open" id="basic_info">
+								<div class="title" @click="infoItemClick">
+									<span>基本信息</span>
+								</div>
+								<div class="main" v-mcscroll :options="">
+									<div class="detail">
+										<v-info-panel :component="component"></v-info-panel>
+									</div>
+								</div>
+							</li>
+							<li class="item" id="data_info">
+								<div class="title" @click="infoItemClick">
+									<span>数据绑定</span>
+								</div>
+								<div class="main">
+									<div class="detail">
+
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+	        seajs.use('./main.js');	//sea-2.0.0.min.js
+		}
+	</script>
+</html>

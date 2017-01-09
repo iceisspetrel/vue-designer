@@ -1,0 +1,30 @@
+.zUploader *{box-sizing:border-box}
+
+.zUploader .fileSelectBtn {
+	display: none
+}
+
+.zUploader .vUpload-button {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "微软雅黑";
+    font-size: 12px;
+    font-weight: 400;
+	height:26px;
+    line-height: 24px;
+    padding: 0 15px;
+    text-decoration: none;
+	text-align:center;
+    box-shadow: rgb(204,204,204) 0 -5px 13px inset;
+}
+.zUploader .vUpload-button:active{
+    box-shadow: rgb(204,204,204) 0 5px 13px inset;
+}
+.zUploader .vUpload-button.zUploader-disable{
+	cursor: not-allowed;
+	color:#bbb !important;
+}

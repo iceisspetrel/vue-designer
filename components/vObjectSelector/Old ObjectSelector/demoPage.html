@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link rel="stylesheet" type="text/css" href="ObjectSelector.css" />
+<script type="text/javascript" src="ObjectSelector.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		var single_selector  = new ObjectSelector({
+			id:"person_selector",   
+			//ele:document.getElementsByClassName("aaa"), //必填，根据dom对象 ?? Jauery对象
+			showName:["name","age","sex"],         //必填，列表查询数据库展示名称，至少需要一个值，最多支持三列的展示，与参数验证相挂钩，当宽度不够又要求展示三列，则报错不绘制	
+			tableName:"person",                    //必填，搜索表名称
+			sefonSql:["%35 张三",">= 35","!= 0"],  //必填，与showName参数对应的sql查询条件，没有时对应index填写 null
+			selectModle:"single",    //必填，选择模式是单选 single  还是多选 ：multi
+			modelType:"preview",     //必填，选择当前组件的模式，是只读状态readOnly  还是普通状态normal   还是报告打印模式preview  还是 表单设计器状态edit
+			maxSelect:5,			 //选填，最多选择多少条，小于等于5，默认多选模式不限
+			minSelect:2,             //选填，至少选择多少条才可以提交，默认1
+			initData:null,           //选填，初始化值，如果有填写，需要验证其initData的数据格式是否满足绘制
+			placeHodler:"请输入人物名称查询",
+			height:null,             //选填，设置控件的初始化高度
+			keyName:"请输入：" ,     //选填，多选模式下的提示语，默认中文  关键字：
+			valid:{                  //选填，设置正则验证的方式
+				required:true,       //选填，设置是否必填
+				maxLength:20,		 //选填，设置输入框里面的最大长度
+				otherReg:[           //选填，保留组件的多条正则验证能力
+					{
+						name:"regTelphone",
+						reg:"([^,]*\),\([^,]*\),\([^,)]*\))/foo(\2,\1,\3)/g",
+						errorMsg:"请输入为13位电话号码！"
+					},{
+						name:"regEMail",
+						reg:"([^,]*\),\([^,]*\),\([^,)]*\))/foo(\2,\1,\3)/g",
+						errorMsg:"请输入正确的邮箱格式！"
+					}
+				]
+			}
+		});
+
+		var multi_selector = new  ObjectSelector({
+			id:"department_selector",
+			showName:["name","code"],	
+			sefonSql:[null,"like CY001"],	
+			tableName:"departemet",	
+			readOnly:false,				
+			selectModle:"multi"
+		});
+
+		var car_multi_selector = new  ObjectSelector({
+			id:"car_selector",
+			showName:["factory","price","size"],		
+			tableName:"car",	
+			readOnly:false,				
+			selectModle:"multi"
+		});
+
+		document.addEventListener("click",function(e){
+		　　var windowBox = document.getElementsByClassName("ObjectSelector_Selection");
+			for (var i = 0; i < windowBox.length; i++) {
+				windowBox[i].style.display = "none";
+			}
+		})
+	}
+</script>
+</head>
+<body>
+	<div style="position: absolute;top: 0;bottom: 0;left: 0; right: 0;background:url('images/background.png') no-repeat;">
+		<div id="person_selector" style="width: 308px;height: 26px;line-height: 26px;top: 328px;left: 370px; position: absolute;">
+			
+		</div>
+		<div id="department_selector" style="width: 362px;height: 26px;line-height: 26px;top: 388px;left: 370px;position: absolute;" >
+			
+		</div>
+
+		<div id="car_selector" style="width: 462px;height: 26px;line-height: 26px;top: 462px;left: 370px;position: absolute;" >
+			
+		</div>
+	</div>
+</body>

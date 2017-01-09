@@ -1,0 +1,100 @@
+.vbutton{
+	margin: 0;
+	padding: 0;
+	border-radius: 4px;
+	/*border-style: solid;*/
+	/*border-width: 2px;*/
+	border-color: transparent;
+	box-sizing: border-box;
+	display: block;
+	cursor: pointer;
+}
+
+.vbutton .vbutton-text{
+	/*padding: 0 6px;*/
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: block;
+	margin-top: 1px;
+    border-radius: 4px;
+    border-top: 1px solid #f5f5f5;
+}
+
+.vbutton.theme-red{
+	background: rgb(246, 70, 68);
+	color: #FFF;
+    box-shadow: rgba(0, 0, 0,0.1) 0px -7px 12px inset;
+    border-bottom: 2px solid #d20f0a;
+}
+.vbutton.theme-red .vbutton-text{
+	border-top: 1px solid #e8a0a0;
+}
+
+.vbutton.theme-red:active{
+	box-shadow: rgba(0, 0, 0,0.1) 0px 7px 12px inset;
+}
+
+.vbutton.theme-blue{
+	background: rgb(70, 169, 254);
+    color: #FFF;
+    /*border-color: rgb(46, 132, 206);*/
+    /*box-shadow: 0 0 3px rgb(64, 134, 193);*/
+    box-shadow: rgba(64, 134, 193,0.2) 0px 7px 12px inset;
+}
+
+.vbutton.theme-blue:active{
+	background: rgb(57, 164, 255);
+}
+
+.vbutton.theme-green{
+	background: rgb(100, 183, 104);
+    color: #FFF;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px -10px 21px inset;
+    border-bottom: 2px solid #638064
+}
+.vbutton.theme-green .vbutton-text{
+	border-top: 1px solid #c4dcda;
+}
+.vbutton.theme-green:active{
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 21px inset;
+}
+
+.vbutton.theme-white{
+	background: rgb(249, 249, 249);
+	color: rgb(28, 28, 28);
+	/*border-color: rgb(230, 230, 230);
+    box-shadow: 0 0 3px rgb(249, 249, 249);*/
+    box-shadow: rgba(249, 249, 249,0.2) 0px 7px 12px inset;
+}
+
+.vbutton.theme-white:active{
+	background: rgb(240, 240, 240);
+}
+
+.vbutton.theme-gray{
+	background: rgb(241, 241, 241);
+	color: rgb(28, 28, 28);
+    box-shadow: rgba(204, 204, 204,0.6) 0px -8px 10px inset;
+    border: 1px solid #ccc;
+    border-bottom: 2px solid #ccc;
+}
+
+.vbutton.theme-gray:active{
+    box-shadow: rgba(204, 204, 204,0.6) 0px 8px 10px inset;
+}
+
+.vbutton.theme-disable{
+	background: rgb(247, 247, 247) !important;
+	color: rgb(187, 187, 187) !important;
+	border-color: rgb(221, 221, 221) !important;
+    box-shadow: 0 0 3px rgb(247, 247, 247) !important;
+	cursor: not-allowed;
+}
+
+.vbutton.theme-disable:active{
+	background: rgb(247, 247, 247) !important;
+	color: rgb(187, 187, 187) !important;
+	border-color: rgb(221, 221, 221) !important;
+    box-shadow: 0 0 3px rgb(247, 247, 247) !important;
+}

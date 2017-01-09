@@ -1,0 +1,218 @@
+<!--
+    checkbox、radio
+-->
+<style>
+    #crs_custom{
+        font-size: 12px;
+        margin: 20px;
+    }
+
+    #crs_custom .cus-tb{
+
+    }
+
+    #crs_custom .cus-tb td{
+        text-align: center;
+    }
+
+    #crs_custom .cus-tb td:nth-child(1){
+        width: 100px;
+    }
+
+    #crs_custom .cus-tb td:nth-child(2){
+        width: 200px;
+    }
+
+    #crs_custom .cus-tb td:nth-child(3){
+        width: 200px;
+    }
+
+    #crs_custom .cus-tb td:nth-child(4){
+        width: 100px;
+        text-align: center;
+    }
+
+    #crs_custom .c-head td{
+        background-color: rgb(242, 242, 242);
+        height: 30px;
+        border: 1px solid #ccc;
+    }
+
+    #crs_custom .c-head td:hover{
+        background-color: rgb(234, 242, 255);
+    }
+
+    #crs_custom .c-head{
+        margin-top: 10px;
+    }
+
+    #crs_custom .c-main{
+        height: 303px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 612px;
+    }
+
+    #crs_custom .c-main td{
+        border: 1px solid #ccc;
+        height: 30px;
+    }
+
+    #crs_custom .c-main td .input{
+        width: 190px;
+        border: 1px solid transparent;
+        background-color: transparent;
+    }
+
+    #crs_custom .c-btn{
+        width: 80px;
+        height: 23px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        line-height: 23px;
+        cursor: pointer;
+        background-color: rgb(255, 255, 255);
+        text-align: center;
+        display: inline-block;
+    }
+
+    #crs_custom .c-btn:active{
+        background-color: rgb(230, 230, 230);
+    }
+
+    #crs_custom .c-main tr.odd td{
+        background-color: rgb(250, 250, 250);
+    }
+
+    #crs_custom .c-main tr:hover td{
+        background-color: rgb(234, 242, 255);
+    }
+
+    #crs_custom .c-head td{
+        font-weight: bold;
+        cursor: default;
+    }
+</style>
+<div id="crs_custom" class="widget">
+    <div class="c-btn" @click="addItem">添加选项</div>
+    <div class="c-head">
+        <table class="cus-tb">
+            <tr>
+                <td>默认选中</td>
+                <td>选项文本</td>
+                <td>选项值</td>
+                <td>操作</td>
+            </tr>
+        </table>
+    </div>
+    <div class="c-main" v-mcscroll>
+        <table class="cus-tb">
+            <tr v-for="item in list" :class="{'odd' : $index % 2 == 1}">
+                <td>
+                    <input v-if="type === 'vCheckbox'" type="checkbox" @click="changeDefaultChecked($index)" :checked="item.defaultChecked"/>
+                    <input v-else @click="changeDefaultChecked($index)" type="radio" :checked="item.defaultChecked === true"/>
+                </td>
+                <td>
+                    <input :title="item.label" class="input" type="text" v-model="item.label"/>
+                </td>
+                <td>
+                    <input class="input" :title="item.value" type="text" v-model="item.value"/>
+                </td>
+                <td>
+                    <div class="c-btn" @click="removeItem($index)">删除</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+
+    var timer;
+    zDialog.pageCallBack = function(target){
+        var map = target.data('map');
+
+        var vm = new Vue({
+            el : '#crs_custom',
+            data : function(){
+
+                var list = map.data.model.config[map.key].map(function(item){
+                    return {
+                        label : item.label,
+                        value : item.value,
+                        defaultChecked : item.defaultChecked ? true : false
+                    }
+                });
+
+                return {
+                    list : list,
+                    type : map.data.model.name
+                };
+            },
+
+            methods : {
+                addItem : function(){
+                    if(timer){
+                        clearTimeout(timer);
+                        timer = null;
+                    }
+                    var index = this.getName();
+                    this.list.push({
+                        label : 'content-' + index,
+                        value : index,
+                        defaultChecked : false,
+                    });
+
+                    timer = setTimeout(function(){
+                        timer = null;
+                        var $scroller = $('#crs_custom .c-main');
+                        //$scroller.scrollTop($scroller[0].scrollHeight);
+                        $scroller.mCustomScrollbar('scrollTo', 'bottom');
+                    }, 100);
+                },
+
+                removeItem : function(index){
+                    this.list.splice(index, 1);
+                },
+
+                getName : function(i){
+                    if(!i){
+                        i = 1;
+                    }
+                    var name = 'content-' + i;
+                    var result = _.find(this.list, function(item){
+                        return item.label == name;
+                    });
+                    if(result){
+                        return this.getName(i + 1);
+                    }
+                    return i;
+                },
+
+                changeDefaultChecked : function(index){
+
+                    if(this.type === 'vCheckbox'){
+                        this.list[index].defaultChecked = !this.list[index].defaultChecked;
+                    } else {
+                        if(this.list[index].defaultChecked){
+                            this.list[index].defaultChecked = false;
+                            return;
+                        }
+                        for(var i=0; i<this.list.length; i++){
+                            if(i === index){
+                                this.list[i].defaultChecked = true;
+                            } else {
+                                this.list[i].defaultChecked = false;
+                            }
+                        }
+                    }
+                },
+
+                getResult : function(){
+                    return this.list;
+                }
+            }
+        });
+
+        $(target).find('.widget').data('widget', vm);
+    }
+</script>

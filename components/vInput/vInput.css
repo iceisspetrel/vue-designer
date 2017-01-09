@@ -1,0 +1,93 @@
+.input-normal{
+	border: 1px solid #ddd;
+	width: 200px;
+	height: 30px;
+	color: #999;
+	font-size: 14px;
+	border-radius: 1px;
+	line-height: 30px;
+	position: relative;
+	border: 1px solid #cccccc;
+    box-shadow: rgba(204,204,204,0.4) 0 2px 6px inset;
+    border-radius: 4px;
+    background: #fff;
+}
+.input-normal>input{
+	outline: none;
+	width: calc(100% - 12px);
+	height: calc(100% - 2px);
+	color: #999;
+	border: 0px;
+	padding: 0px;
+	background-color: transparent;
+	text-indent: 9px;
+}
+.input-normal>input[readonly=true]{
+}
+.input-normal .input-error-container{
+	position: absolute;
+    top: 100%;
+    width: 100%;
+    color: red;
+    font-size: 10px;
+    line-height: 24px;
+    margin-top: 6px;
+    z-index: 10;
+    letter-spacing: 1px;
+    border: 1px solid #cccccc;
+    display: block;
+    border-radius: 4px;
+    /*text-indent: 1em;*/
+    margin-left : 0px;
+    background: #fff;
+    padding: 0 5px;
+    text-align: justify;
+}
+.input-active{	
+}
+.input-active>input{color: black;}
+.input-complate{}
+.input-complate>input{
+	color: black;
+}
+.input-success{
+}
+.input-success>input{
+	width: calc(100% - 40px);
+}
+.input-error{
+	border: 1px solid red;
+	box-shadow:0px 0px 3px 0px red;
+	position: relative;
+}
+.input-error>input{
+	width: calc(100% - 12px);
+	color: red;
+}
+
+.input-disable,.input-disable>input{
+	background-color:#f2f2f2; 
+}
+.input-label{
+	border: 0px;
+	color : black;
+}
+.input-label>input{
+	color:black;
+}
+.input-edit,.input-edit>input{
+	-moz-user-select:none;/*火狐*/
+	-webkit-user-select:none;/*webkit浏览器*/
+	-ms-user-select:none;/*IE10*/
+	-khtml-user-select:none;/*早期浏览器*/
+	user-select:none;
+}
+.input-edit>div{
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-left:10px;
+    display: inline-block;
+    width: calc(100% - 12px);
+	height: calc(100% - 2px);
+}
